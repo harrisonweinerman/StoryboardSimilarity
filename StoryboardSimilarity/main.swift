@@ -10,5 +10,5 @@ import Foundation
 
 // Either pass in the directory you'd like to scan Storyboards in, or use the working directory
 let searchPath = CommandLine.arguments.count > 1 ? CommandLine.arguments[1] : FileManager.default.currentDirectoryPath
-let manager = StoryboardFileManager(searchDirectory: searchPath)
+let manager = ProjectFileManager(searchDirectory: searchPath)
 manager.check()

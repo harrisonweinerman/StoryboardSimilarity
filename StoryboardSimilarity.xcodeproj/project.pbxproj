@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		841ED11D240B6D7A0048E5E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841ED11C240B6D7A0048E5E8 /* main.swift */; };
 		841ED124240B6DE00048E5E8 /* StoryboardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841ED123240B6DE00048E5E8 /* StoryboardParser.swift */; };
-		841ED127240B738C0048E5E8 /* StoryboardFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841ED126240B738C0048E5E8 /* StoryboardFileManager.swift */; };
+		841ED127240B738C0048E5E8 /* ProjectFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841ED126240B738C0048E5E8 /* ProjectFileManager.swift */; };
+		846A81E3240F2E0A0027CC4F /* XcodeProjectParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A81E2240F2E0A0027CC4F /* XcodeProjectParser.swift */; };
+		846A81E5240F2E690027CC4F /* IDParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A81E4240F2E690027CC4F /* IDParser.swift */; };
+		847DD221261BBD590084533E /* UserDataTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DD220261BBD590084533E /* UserDataTracker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,7 +31,10 @@
 		841ED119240B6D7A0048E5E8 /* StoryboardSimilarity */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = StoryboardSimilarity; sourceTree = BUILT_PRODUCTS_DIR; };
 		841ED11C240B6D7A0048E5E8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		841ED123240B6DE00048E5E8 /* StoryboardParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardParser.swift; sourceTree = "<group>"; };
-		841ED126240B738C0048E5E8 /* StoryboardFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardFileManager.swift; sourceTree = "<group>"; };
+		841ED126240B738C0048E5E8 /* ProjectFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFileManager.swift; sourceTree = "<group>"; };
+		846A81E2240F2E0A0027CC4F /* XcodeProjectParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeProjectParser.swift; sourceTree = "<group>"; };
+		846A81E4240F2E690027CC4F /* IDParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDParser.swift; sourceTree = "<group>"; };
+		847DD220261BBD590084533E /* UserDataTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataTracker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +69,10 @@
 			children = (
 				841ED11C240B6D7A0048E5E8 /* main.swift */,
 				841ED123240B6DE00048E5E8 /* StoryboardParser.swift */,
-				841ED126240B738C0048E5E8 /* StoryboardFileManager.swift */,
+				846A81E4240F2E690027CC4F /* IDParser.swift */,
+				846A81E2240F2E0A0027CC4F /* XcodeProjectParser.swift */,
+				847DD220261BBD590084533E /* UserDataTracker.swift */,
+				841ED126240B738C0048E5E8 /* ProjectFileManager.swift */,
 			);
 			path = StoryboardSimilarity;
 			sourceTree = "<group>";
@@ -127,8 +136,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				841ED11D240B6D7A0048E5E8 /* main.swift in Sources */,
+				847DD221261BBD590084533E /* UserDataTracker.swift in Sources */,
 				841ED124240B6DE00048E5E8 /* StoryboardParser.swift in Sources */,
-				841ED127240B738C0048E5E8 /* StoryboardFileManager.swift in Sources */,
+				846A81E3240F2E0A0027CC4F /* XcodeProjectParser.swift in Sources */,
+				841ED127240B738C0048E5E8 /* ProjectFileManager.swift in Sources */,
+				846A81E5240F2E690027CC4F /* IDParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

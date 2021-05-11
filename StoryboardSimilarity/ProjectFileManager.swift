@@ -1,5 +1,5 @@
 //
-//  StoryboardFileManager.swift
+//  ProjectFileManager.swift
 //  StoryboardSimilarity
 //
 //  Created by Harrison Weinerman on 2/29/20.
@@ -8,13 +8,16 @@
 
 import Foundation
 
-/// Responsible for finding Storyboard files in the search directory, creating a
-/// `StoryboardParser` for each Storyboard, then caching and formatting the results.
-class StoryboardFileManager: NSObject {
-    var filePaths = [String]()
+/// Responsible for finding Xcode projects and Storyboard files in the search directory, creating a
+/// `StoryboardParser` for each Storyboard and an `XcodeProjectParser` for each Xcode project.
+/// Unique identifiers are cached to derive similarity results.
+class ProjectFileManager: NSObject {
+    var storyboardFilePaths = [String]()
+    var pbxprojFilePaths = [String]()
     private typealias ObjectID = String
     private typealias StudentName = String
     
+    private let userDataTracker = UserDataTracker()
     private var objectIDs = [ObjectID : [StudentName]]()
     private var studentSimilarityIncidents = [StudentName : [(StudentName, ObjectID)]]()
     
@@ -25,26 +28,49 @@ class StoryboardFileManager: NSObject {
             super.init()
             return
         }
-        // Find all Storyboards in the search directory
+        // Find all relevant files in the search directory
         while let file = enumerator.nextObject() as? String {
             if file.hasSuffix("storyboard") && !file.contains("LaunchScreen") {
-                filePaths.append(path + "/\(file)")
+                storyboardFilePaths.append(path + "/\(file)")
+            }
+            if file.hasSuffix("pbxproj") && !file.contains("Pods") {
+                pbxprojFilePaths.append(path + "/\(file)")
+            }
+            if file.hasSuffix("xcuserdatad") {
+                if let studentName = URL(string: file)?.lastPathComponent,
+                   let projectName = URL(string: file)?.deletingLastPathComponent().deletingLastPathComponent().lastPathComponent
+                   {
+                    userDataTracker.log(student: studentName, project: projectName)
+                } else {
+                    print("Error: not able to unwrap student and/or project name parsing xcuserdatad for \(file)")
+                }
             }
         }
-        print("Found \(filePaths.count) Storyboards in \(path)")
+        print("Found \(storyboardFilePaths.count) Storyboards in \(path)")
+        print("Found \(pbxprojFilePaths.count) Xcode projects in \(path)")
         super.init()
     }
     
     /// Checks for similarities in the Storyboards found in the search directory and prints the results
     func check() {
-        // Find identical objects
-        for path in filePaths {
-            let studentName = URL(fileURLWithPath: path).path
+        // Find students who may have sent/opened each other's projects
+        userDataTracker.printStudentsLoggedIntoMultipleFiles()
+        
+        // Find identical Storyboard objects
+        for path in storyboardFilePaths {
             let parser = StoryboardParser(path: path)
             parser.parse()?.forEach { id in
                 // Associate this student with this object ID,
                 // or, add this student to the list of students associated with this object id
-                objectIDs[id] = (objectIDs[id] ?? [StudentName]()) + [studentName]
+                objectIDs[id] = (objectIDs[id] ?? [StudentName]()) + [path]
+            }
+        }
+        
+        // Find identical Xcode project references
+        for path in pbxprojFilePaths {
+            let parser = XcodeProjectParser(path: path)
+            parser.parse()?.forEach{ id in
+                objectIDs[id] = (objectIDs[id] ?? [StudentName]()) + [path]
             }
         }
         
@@ -75,5 +101,6 @@ class StoryboardFileManager: NSObject {
                 print("\t\(infraction.1) matched student \(infraction.0)")
             }
         }
+        print("End Storyboard Similarity Results (\(formatter.string(from: Date())))")
     }
 }

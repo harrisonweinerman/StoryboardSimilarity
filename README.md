@@ -1,5 +1,5 @@
-# StoryboardSimilarity
-Measures similarity of Storyboard files to help detect suspected plagiarism in iOS development classes.
+# ProjectSimilarity
+Measures similarity of Storyboard, pbxproj, and xcuserdata files to help detect suspected plagiarism in iOS development classes.
 
 ## What it Does
 Storyboards create an object ID for each item you add. Usually, these are random, and as such they probably
@@ -23,12 +23,18 @@ or by right clicking the Storyboard in Xcode and choosing *Open As>Source Code*.
 that was flagged and determine its interest. If it is just the default scene, it is probably not plagiarism. If UI
 components, constraints, etc. have identical IDs, it may be cause for further investigation.
 
+Xcode projects also assign unique identifiers for resources added to a project. ProjectSimilarity hashes
+these identifiers just as Storyboard identifiers to add another indication of projects that may be based on each other.
+
+Lastly, projects that contain multiple user entries in Xcuserdata files can also be noted, as this might be another
+signal that projects were shared between users.
+
 **Just like Stanford's MOSS, this project cannot automatically detect plagiarism, and all results should be interpreted by a human!**
 
 ## Preparation
 It's easiest to move all of the Xcode projects to a folder. The Storyboards can be nested at any level, but for the results to be useful, you'll want filepath to contain the student's name.
 
-Alternatively, you can move just the Storyboard files without the rest of the Xcode project, but you'll want to
+Alternatively, you can move just the Storyboard/.Xcodeproj files without the rest of the Xcode project, but you'll want to
 rename the files so you know which is which.
 
 ## How to Use

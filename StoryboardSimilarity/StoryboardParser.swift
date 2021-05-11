@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a Storyboard and its XML
-class StoryboardParser: NSObject, XMLParserDelegate {
+class StoryboardParser: NSObject, XMLParserDelegate, IDParser {
     /// Components of interest supported by this parser. Feel free to add more.
     private static let inspectableElements: Set<String> = [
         "view",
@@ -27,6 +27,7 @@ class StoryboardParser: NSObject, XMLParserDelegate {
         "stepper",
         "slider",
         "tapGestureRecognizer",
+        
     ]
     
     /// Some IDs are okay to be common between projects
